@@ -50,7 +50,7 @@ export default function ProTipsGrid({
   return (
     <section className="not-prose my-14 overflow-hidden rounded-2xl bg-black">
       <div className="px-6 pt-10 pb-2 sm:px-10">
-        <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-mustard">
+        <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-grey-400">
           Quick Reference
         </span>
         <h2 className="mt-3 max-w-2xl font-serif text-3xl font-semibold !text-white sm:text-4xl">
@@ -61,26 +61,28 @@ export default function ProTipsGrid({
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-px bg-white/10 sm:grid-cols-2">
-        {tips.map((tip, i) => (
-          <div
-            key={tip.title}
-            className="group relative bg-black p-6 transition-colors duration-300 hover:bg-white/[0.04] sm:p-8"
-          >
-            <span
-              aria-hidden="true"
-              className="font-serif text-5xl font-bold leading-none text-white/10 transition-colors duration-300 group-hover:text-mustard/30"
+      <div className="px-6 pb-10 sm:px-10">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {tips.map((tip, i) => (
+            <div
+              key={tip.title}
+              className="group relative rounded-xl border border-grey-200/20 bg-black p-6 transition-colors duration-300 hover:border-grey-200/40 sm:p-8"
             >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="mt-4 font-serif text-xl font-semibold !text-white">
-              {tip.title}
-            </h3>
-            <p className="mt-2 text-[14px] leading-relaxed text-grey-400">
-              {tip.description}
-            </p>
-          </div>
-        ))}
+              <span
+                aria-hidden="true"
+                className="font-serif text-5xl font-bold leading-none text-[#E8E8E8]/15 transition-colors duration-300 group-hover:text-[#E8E8E8]/25"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-4 font-serif text-xl font-semibold !text-white">
+                {tip.title}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-grey-400">
+                {tip.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

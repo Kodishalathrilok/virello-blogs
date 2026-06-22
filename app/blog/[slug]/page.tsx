@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { MDXComponents } from "mdx/types";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TableOfContents from "@/components/TableOfContents";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import QuickShopBar from "@/components/QuickShopBar";
+import QuickShopDrawer from "@/components/QuickShopDrawer";
+import ProductCard from "@/components/ProductCard";
 import { mdxComponents } from "@/components/mdx";
 import { getAllPosts, getPostBySlug, getPostSlugs, formatDate } from "@/lib/posts";
 import { extractHeadings } from "@/lib/slugify";
@@ -54,9 +58,23 @@ export default async function PostPage({
   const headings = extractHeadings(content);
   const related = getAllPosts().filter((p) => p.slug !== slug);
 
+  const productsById = Object.fromEntries(
+    meta.products.map((p) => [p.id, p])
+  );
+  const components: MDXComponents = {
+    ...mdxComponents,
+    Product: ({ id }: { id?: string }) => {
+      const product = id ? productsById[id] : undefined;
+      return product ? <ProductCard {...product} /> : null;
+    },
+  };
+
   return (
     <>
       <Navbar />
+      <QuickShopBar
+        products={meta.products.map((p) => ({ id: p.id, name: p.title }))}
+      />
       <main>
         {/* Split hero */}
         <section className="grid grid-cols-1 lg:grid-cols-2">
@@ -69,7 +87,7 @@ export default async function PostPage({
               All posts
             </Link>
 
-            <span className="font-label w-fit rounded-full bg-mustard px-3 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-black">
+            <span className="font-label w-fit rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-black">
               {meta.niche}
             </span>
 
@@ -112,7 +130,7 @@ export default async function PostPage({
           <article className="max-w-2xl">
             <MDXRemote
               source={content}
-              components={mdxComponents}
+              components={components}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
             <AffiliateDisclosure />
@@ -134,10 +152,10 @@ export default async function PostPage({
                       className="group flex items-center justify-between gap-6 py-5 transition-colors duration-200"
                     >
                       <div>
-                        <span className="font-label text-[10px] font-semibold uppercase tracking-[0.08em] text-green">
+                        <span className="font-label text-[10px] font-semibold uppercase tracking-[0.08em] text-grey-400">
                           {p.niche}
                         </span>
-                        <p className="mt-1 font-serif text-xl font-semibold text-black transition-colors duration-200 group-hover:text-green">
+                        <p className="mt-1 font-serif text-xl font-semibold text-black transition-colors duration-200 group-hover:text-grey-600">
                           {p.title}
                         </p>
                       </div>
@@ -152,6 +170,7 @@ export default async function PostPage({
           </section>
         ) : null}
       </main>
+      <QuickShopDrawer products={meta.products} />
       <Footer />
     </>
   );

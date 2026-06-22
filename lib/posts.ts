@@ -4,6 +4,17 @@ import matter from "gray-matter";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
+export type Product = {
+  id: string;
+  tag?: string;
+  title: string;
+  href: string;
+  description: string;
+  image?: string;
+  rating?: number;
+  reviewCount?: string;
+};
+
 export type PostMeta = {
   slug: string;
   title: string;
@@ -12,6 +23,7 @@ export type PostMeta = {
   description: string;
   image: string;
   readTime: string;
+  products: Product[];
 };
 
 export function getPostSlugs(): string[] {
@@ -37,6 +49,7 @@ export function getPostBySlug(
     description: data.description as string,
     image: data.image as string,
     readTime: data.readTime as string,
+    products: (data.products as Product[]) ?? [],
   };
   return { meta, content };
 }

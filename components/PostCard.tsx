@@ -26,7 +26,7 @@ export default function PostCard({
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
-        <span className="font-label w-fit rounded-full bg-grey-100 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-green">
+        <span className="font-label w-fit rounded-full bg-grey-100 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-black">
           {post.niche}
         </span>
         <h3 className="font-serif text-[22px] font-semibold leading-[1.15] text-black">

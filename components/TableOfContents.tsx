@@ -41,7 +41,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
                 href={`#${h.slug}`}
                 className={`-ml-px block cursor-pointer border-l-2 py-1.5 pl-4 leading-snug transition-colors duration-200 ${
                   isActive
-                    ? "border-mustard font-medium text-black"
+                    ? "border-black font-medium text-black"
                     : "border-transparent text-grey-400 hover:text-grey-600"
                 }`}
               >

@@ -16,8 +16,10 @@
   --color-grey-200: #e8e8e8;
   --color-grey-400: #999999;
   --color-grey-600: #555555;
-  --color-mustard: #f2b705;
   --color-green: #1f4d3d;
+  /* Amazon orange — used ONLY on Amazon CTA buttons */
+  --color-amazon: #ff9900;
+  --color-amazon-dark: #e68a00;
 }
 
 :root {
@@ -90,4 +92,19 @@ h4 {
 
 .animate-fade-up {
   animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Floating Quick Shop button — pulses three times on load, then rests */
+@keyframes pulse-thrice {
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 0 0 10px rgba(10, 10, 10, 0.1);
+  }
+}
+
+.animate-pulse-thrice {
+  animation: pulse-thrice 1.1s ease-in-out 3;
 }

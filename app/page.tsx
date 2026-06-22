@@ -20,7 +20,7 @@ export default function Home() {
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-green">
+              <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-grey-400">
                 From the journal
               </span>
               <h2 className="mt-3 font-serif text-4xl font-semibold tracking-[-0.02em] text-black sm:text-5xl">

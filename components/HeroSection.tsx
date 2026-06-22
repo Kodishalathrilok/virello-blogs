@@ -8,7 +8,7 @@ export default function HeroSection({ latest }: { latest?: PostMeta }) {
     <section className="grid grid-cols-1 lg:grid-cols-2">
       {/* Black left panel */}
       <div className="flex flex-col justify-center bg-black px-6 py-16 sm:px-12 lg:px-16 lg:py-24">
-        <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-mustard">
+        <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-grey-400">
           Home Organization · Small Space Living
         </span>
         <h1 className="mt-6 font-serif text-[44px] font-bold italic leading-[1.04] tracking-[-0.02em] text-white sm:text-6xl">
@@ -22,7 +22,7 @@ export default function HeroSection({ latest }: { latest?: PostMeta }) {
         {latest ? (
           <Link
             href={`/blog/${latest.slug}`}
-            className="group mt-9 inline-flex w-fit cursor-pointer items-center gap-3 rounded-full bg-mustard px-6 py-3 text-black transition-all duration-300 hover:gap-4 hover:bg-white"
+            className="group mt-9 inline-flex w-fit cursor-pointer items-center gap-3 rounded-full bg-white px-6 py-3 text-black transition-all duration-300 hover:gap-4 hover:bg-grey-200"
           >
             <span className="font-label text-[12px] font-bold uppercase tracking-[0.08em]">
               Read the latest post

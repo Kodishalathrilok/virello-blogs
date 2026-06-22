@@ -20,7 +20,7 @@ export default function BlogIndexPage() {
       <main>
         <header className="border-b border-grey-200 bg-grey-100">
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-            <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-green">
+            <span className="font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-grey-400">
               The Journal
             </span>
             <h1 className="mt-3 max-w-3xl font-serif text-5xl font-bold italic tracking-[-0.02em] text-black sm:text-6xl">

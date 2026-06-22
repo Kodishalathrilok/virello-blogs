@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Children, isValidElement, type ReactNode } from "react";
 import { slugify } from "@/lib/slugify";
 import Figure from "@/components/Figure";
-import RecBox from "@/components/RecBox";
+import ProductCard from "@/components/ProductCard";
 import ProTip from "@/components/ProTip";
 import ProTipsGrid from "@/components/ProTipsGrid";
 
@@ -48,7 +48,7 @@ export const mdxComponents: MDXComponents = {
     </ol>
   ),
   li: ({ children }) => (
-    <li className="relative pl-6 before:absolute before:left-0 before:top-[0.7em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-mustard">
+    <li className="relative pl-6 before:absolute before:left-0 before:top-[0.7em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-black">
       {children}
     </li>
   ),
@@ -57,7 +57,7 @@ export const mdxComponents: MDXComponents = {
   ),
   em: ({ children }) => <em className="italic">{children}</em>,
   blockquote: ({ children }) => (
-    <blockquote className="my-8 border-l-4 border-green pl-6 font-serif text-2xl italic leading-snug text-black">
+    <blockquote className="my-8 border-l-4 border-black pl-6 font-serif text-2xl italic leading-snug text-black">
       {children}
     </blockquote>
   ),
@@ -71,7 +71,7 @@ export const mdxComponents: MDXComponents = {
           href={url}
           target="_blank"
           rel="nofollow sponsored noopener noreferrer"
-          className="cursor-pointer font-medium text-green underline underline-offset-4 transition-colors duration-200 hover:text-mustard"
+          className="cursor-pointer font-medium text-black underline underline-offset-4 transition-colors duration-200 hover:text-grey-600"
         >
           {children}
         </a>
@@ -80,7 +80,7 @@ export const mdxComponents: MDXComponents = {
     return (
       <Link
         href={url}
-        className="cursor-pointer font-medium text-green underline underline-offset-4 transition-colors duration-200 hover:text-mustard"
+        className="cursor-pointer font-medium text-black underline underline-offset-4 transition-colors duration-200 hover:text-grey-600"
       >
         {children}
       </Link>
@@ -91,7 +91,7 @@ export const mdxComponents: MDXComponents = {
   ),
   // Custom components available inside MDX
   Figure,
-  RecBox,
+  ProductCard,
   ProTip,
   ProTipsGrid,
 };
