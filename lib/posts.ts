@@ -6,6 +6,8 @@ const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
 export type Product = {
   id: string;
+  /** slug of the section heading this product belongs to (for sidebar highlight) */
+  section?: string;
   tag?: string;
   title: string;
   href: string;

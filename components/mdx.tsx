@@ -28,21 +28,25 @@ export const mdxComponents: MDXComponents = {
     const num = m?.[1];
     const title = m ? m[2] : null;
     return (
-      <h2
-        id={id}
-        className={`${COL} relative mt-20 scroll-mt-28 font-serif text-3xl font-semibold leading-tight text-black sm:text-[36px]`}
-      >
-        {num ? (
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -left-[60px] -top-10 hidden select-none font-serif text-[96px] font-bold leading-none text-[#f0f0f0] xl:block"
-          >
-            {num}
-          </span>
-        ) : null}
-        {num ? <span className="xl:hidden">{num}. </span> : null}
-        {title ?? children}
-      </h2>
+      <div className="xl:overflow-hidden">
+        <h2
+          id={id}
+          className={`${COL} relative mt-20 scroll-mt-28 font-serif text-3xl font-semibold leading-tight text-black sm:text-[36px] xl:min-h-[56px]`}
+        >
+          {num ? (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-20 -top-2 z-0 hidden select-none font-serif text-[80px] font-bold leading-none text-[#efefef] xl:block"
+            >
+              {num}
+            </span>
+          ) : null}
+          {num ? (
+            <span className="relative z-[1] xl:hidden">{num}. </span>
+          ) : null}
+          <span className="relative z-[1]">{title ?? children}</span>
+        </h2>
+      </div>
     );
   },
   h3: ({ children }) => (
