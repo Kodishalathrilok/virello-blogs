@@ -50,7 +50,7 @@ export default function QuickShopDrawer({
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Shop ${products.length} products from this post`}
-        className={`font-label fixed bottom-4 right-4 z-50 inline-flex cursor-pointer items-center gap-2 rounded-full bg-black px-4 py-2.5 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#333] sm:bottom-6 sm:right-6 sm:px-5 sm:py-3 sm:text-[14px] ${
+        className={`font-label fixed bottom-4 right-4 z-50 inline-flex cursor-pointer items-center gap-2 rounded-full bg-black px-4 py-2.5 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#333] sm:bottom-6 sm:right-6 sm:px-5 sm:py-3 sm:text-[14px] lg:hidden ${
           pulse ? "animate-pulse-thrice" : "shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
         }`}
       >

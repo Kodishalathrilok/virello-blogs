@@ -29,8 +29,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* Offset anchor scroll for the sticky 60px navbar */
-  scroll-padding-top: 88px;
+  /* Offset anchor scroll for the sticky 60px navbar + breathing room */
+  scroll-padding-top: 96px;
 }
 
 body {

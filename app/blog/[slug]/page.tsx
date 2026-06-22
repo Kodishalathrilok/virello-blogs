@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { MDXComponents } from "mdx/types";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,9 +9,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TableOfContents from "@/components/TableOfContents";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
-import QuickShopBar from "@/components/QuickShopBar";
 import QuickShopDrawer from "@/components/QuickShopDrawer";
-import ProductCard from "@/components/ProductCard";
+import ProductSidebar from "@/components/ProductSidebar";
 import { mdxComponents } from "@/components/mdx";
 import { getAllPosts, getPostBySlug, getPostSlugs, formatDate } from "@/lib/posts";
 import { extractHeadings } from "@/lib/slugify";
@@ -58,89 +56,86 @@ export default async function PostPage({
   const headings = extractHeadings(content);
   const related = getAllPosts().filter((p) => p.slug !== slug);
 
-  const productsById = Object.fromEntries(
-    meta.products.map((p) => [p.id, p])
-  );
-  const components: MDXComponents = {
-    ...mdxComponents,
-    Product: ({ id }: { id?: string }) => {
-      const product = id ? productsById[id] : undefined;
-      return product ? <ProductCard {...product} /> : null;
-    },
-  };
-
   return (
     <>
       <Navbar />
-      <QuickShopBar
-        products={meta.products.map((p) => ({ id: p.id, name: p.title }))}
-      />
       <main>
-        {/* Split hero */}
-        <section className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="flex flex-col justify-center bg-black px-6 py-14 sm:px-12 lg:px-16 lg:py-20">
-            <Link
-              href="/blog"
-              className="group font-label mb-8 inline-flex w-fit cursor-pointer items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-grey-400 transition-colors duration-200 hover:text-white"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
-              All posts
-            </Link>
+        {/* Full-bleed hero banner */}
+        <section className="relative h-[420px] w-full sm:h-[480px] lg:h-[520px]">
+          <Image
+            src={meta.image}
+            alt={meta.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/15" />
+          <div className="absolute inset-0 flex items-end">
+            <div className="mx-auto w-full max-w-[1400px] px-5 pb-10 md:px-10 lg:px-8 lg:pb-14">
+              <Link
+                href="/blog"
+                className="group font-label mb-6 inline-flex w-fit cursor-pointer items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/80 transition-colors duration-200 hover:text-white"
+              >
+                <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
+                All posts
+              </Link>
 
-            <span className="font-label w-fit rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-black">
-              {meta.niche}
-            </span>
-
-            <h1 className="mt-6 font-serif text-[40px] font-bold italic leading-[1.06] tracking-[-0.02em] text-white sm:text-[52px]">
-              {meta.title}
-            </h1>
-
-            <div className="font-label mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[12px] uppercase tracking-[0.08em] text-grey-400">
-              <span className="inline-flex items-center gap-2">
-                <Calendar className="h-3.5 w-3.5" />
-                {formatDate(meta.date)}
+              <span className="font-label block w-fit rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-black">
+                {meta.niche}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5" />
-                {meta.readTime}
-              </span>
+
+              <h1 className="mt-5 max-w-4xl font-serif text-[34px] font-bold italic leading-[1.05] tracking-[-0.02em] text-white sm:text-[44px] lg:text-[56px]">
+                {meta.title}
+              </h1>
+
+              <div className="font-label mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-[12px] uppercase tracking-[0.08em] text-white/80">
+                <span className="inline-flex items-center gap-2">
+                  <Calendar className="h-3.5 w-3.5" />
+                  {formatDate(meta.date)}
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5" />
+                  {meta.readTime}
+                </span>
+              </div>
             </div>
-          </div>
-
-          <div className="relative min-h-[280px] sm:min-h-[400px] lg:min-h-full">
-            <Image
-              src={meta.image}
-              alt={meta.title}
-              fill
-              priority
-              sizes="(max-width:1024px) 100vw, 50vw"
-              className="object-cover"
-            />
           </div>
         </section>
 
-        {/* Body + sticky TOC */}
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-          <aside className="hidden lg:block">
-            <div className="sticky top-[88px]">
-              <TableOfContents headings={headings} />
-            </div>
-          </aside>
+        {/* Body: [TOC 240] [content] [products 280] */}
+        <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 lg:px-8 lg:py-16">
+          {/* Mobile / tablet TOC accordion */}
+          <div className="mb-8 lg:hidden">
+            <TableOfContents headings={headings} variant="accordion" />
+          </div>
 
-          <article className="max-w-2xl">
-            <MDXRemote
-              source={content}
-              components={components}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-            />
-            <AffiliateDisclosure />
-          </article>
+          <div className="lg:grid lg:grid-cols-[240px_minmax(0,1fr)_280px] lg:gap-12">
+            <aside className="hidden lg:block">
+              <TableOfContents headings={headings} variant="sidebar" />
+            </aside>
+
+            <article className="min-w-0">
+              <MDXRemote
+                source={content}
+                components={mdxComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
+              <div className="mx-auto w-full max-w-[680px]">
+                <AffiliateDisclosure />
+              </div>
+            </article>
+
+            <aside className="hidden lg:block">
+              <ProductSidebar products={meta.products} />
+            </aside>
+          </div>
         </div>
 
         {/* Related */}
         {related.length > 0 ? (
           <section className="border-t border-grey-200 bg-grey-100">
-            <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+            <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 lg:px-8">
               <h2 className="font-serif text-3xl font-semibold text-black">
                 Keep reading
               </h2>

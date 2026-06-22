@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { getImageDim } from "@/lib/images";
 
 export default function Figure({
   src,
@@ -11,23 +10,16 @@ export default function Figure({
   caption?: string;
 }) {
   if (!src) return null;
-  const dim = getImageDim(src);
-  const portrait = dim.height > dim.width;
 
   return (
-    <figure className={`not-prose my-8 ${portrait ? "mx-auto max-w-sm" : ""}`}>
-      <div className="overflow-hidden rounded-xl border border-grey-200 bg-grey-100">
+    <figure className="my-8 w-full">
+      <div className="relative h-[280px] w-full overflow-hidden rounded-lg bg-grey-100 md:h-[420px]">
         <Image
           src={src}
           alt={alt}
-          width={dim.width}
-          height={dim.height}
-          sizes={
-            portrait
-              ? "(max-width:768px) 100vw, 384px"
-              : "(max-width:768px) 100vw, 740px"
-          }
-          className="h-auto w-full object-cover"
+          fill
+          sizes="(max-width:1024px) 100vw, 760px"
+          className="object-cover"
         />
       </div>
       {caption ? (
